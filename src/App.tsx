@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HomePage from "./HomePage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import QuizPage from "./QuizPage";
+import PickPage from "./PickPage";
+import WritePage from "./WritePage";
+import GuestBooks from "./GuestBooks";
+import {QueryClient, QueryClientProvider} from "react-query";
+
 
 function App() {
+
+  const queryClient = new QueryClient()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/pick" element={<PickPage />}/>
+        <Route path="/write" element={<WritePage />} />
+        <Route path="/all" element={<GuestBooks/>} />
+      </Routes>
+    </BrowserRouter>
+      </QueryClientProvider>
   );
 }
+
+
 
 export default App;
